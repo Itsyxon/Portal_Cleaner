@@ -1,39 +1,19 @@
 const arrayOfGarbage = [
-  'опрос',
-  'реклама',
-  'голосование',
-  'проголосовать',
-  'проголосуйте',
-  'участие',
   'тест',
-  'просим',
-  'набор',
-  'анкету',
-  'анкета',
-  'анкеты',
-  'голосовании',
-  'опроса',
-  'опросов',
-  'участия',
-  'участие',
-  'опросы',
-  'пройдите',
-  'пройти',
-  'исследование',
-  'исследовании',
-  'исследованию'
-]
+  'опрос',
+  'реклам',
+  'голос',
+  'анкет',
+  'исследован'
+];
 
 window.onload = () => {
-  const collectionOfPosts = document.querySelectorAll('.feed-item-wrap')
+  const collectionOfPosts = document.querySelectorAll('.feed-item-wrap');
+  const garbageRegex = new RegExp(arrayOfGarbage.join('|'), 'i');
   collectionOfPosts.forEach((singleCollection) => {
-    const wrapText = singleCollection.querySelector('.feed-post-text').textContent.toLowerCase().replace(',', '').replace('.', '').split(' ')
-    console.log(wrapText)
-    wrapText.forEach((singleText) => {
-        if(arrayOfGarbage.includes(singleText)) {
-            singleCollection.style.display = 'none'
-        }
-    })
-  })
+    const wrapText = singleCollection.querySelector('.feed-post-text').textContent;
+    if (garbageRegex.test(wrapText)) {
+      singleCollection.style.display = 'none';
+    }
+  });
 }
-
